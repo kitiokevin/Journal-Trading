@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>Journal de trading</title>
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#eef1f6;--pn:#fff;--p2:#e6eaf2;--tx:#141a2e;--mu:#667090;--ln:#d9deea;--ac:#5b47e0;--g:#0f9d63;--r:#d93f4a;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1220;--pn:#171c30;--p2:#1f2540;--tx:#e9ecf7;--mu:#8c94b3;--ln:#2a3152;--ac:#9a8bff;--g:#35d394;--r:#ff6b75;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1220;--pn:#171c30;--p2:#1f2540;--tx:#e9ecf7;--mu:#8c94b3;--ln:#2a3152;--ac:#9a8bff;--g:#35d394;--r:#ff6b75;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 Manrope,system-ui,sans-serif;font-variant-numeric:tabular-nums}
+header{display:flex;align-items:center;gap:14px;padding:14px 16px 0;flex-wrap:wrap}
+h1{font-size:20px;font-weight:800;margin:0;letter-spacing:-.02em}
+nav{display:flex;gap:4px;overflow-x:auto;max-width:100%;padding:10px 16px 0}
+nav button{background:none;border:0;color:var(--mu);font:600 14px Manrope,system-ui;padding:8px 12px;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
+nav button.on{color:var(--tx);border-color:var(--ac)}
+main{padding:16px;max-width:1100px;margin:0 auto}
+.row{display:grid;gap:12px;margin-bottom:12px}
+.c2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.c6{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.pn{background:var(--pn);border:1px solid var(--ln);border-radius:10px;padding:14px;min-width:0}
+.k span,.mu{color:var(--mu);font-size:13px}
+.k b{display:block;font-size:22px;font-weight:800;margin-top:2px}
+h2{font-size:15px;margin:0 0 10px;font-weight:800}
+.g{color:var(--g)}.r{color:var(--r)}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:8px;padding:9px 14px;font:700 14px Manrope,system-ui;cursor:pointer}
+.btn.s{background:var(--p2);color:var(--tx)}.btn.d{background:var(--r)}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,nav button:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+input,select,textarea{width:100%;background:var(--bg);color:var(--tx);border:1px solid var(--ln);border-radius:8px;padding:9px;font:inherit}
+label{display:block;font-size:13px;color:var(--mu);font-weight:600}
+.tb{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.tb input,.tb select{width:auto;min-width:130px}
+.sc{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{text-align:left;color:var(--mu);font-weight:600;font-size:13px;padding:6px 8px;border-bottom:1px solid var(--ln);white-space:nowrap}
+td{padding:9px 8px;border-bottom:1px solid var(--ln);white-space:nowrap}
+tr.tr:hover{background:var(--p2)}
+.tag{background:var(--p2);border-radius:99px;padding:2px 9px;font-size:12px;font-weight:600}
+.cal{display:grid;grid-template-columns:repeat(7,1fr) 1.1fr;gap:4px}
+.cd{min-height:64px;border-radius:6px;border:1px solid var(--ln);padding:4px 6px;font-size:12px;background:var(--pn)}
+.cd b{display:block;font-size:13px}.cd.w{background:var(--p2);border-style:dashed}
+.hd{color:var(--mu);font-size:12px;font-weight:600;text-align:center}
+.bar{height:8px;border-radius:4px;background:var(--g);min-width:2px}.bar.n{background:var(--r)}
+.ar{display:grid;grid-template-columns:110px 1fr 120px;gap:8px;align-items:center;padding:5px 0;font-size:13px}
+dialog{background:var(--pn);color:var(--tx);border:1px solid var(--ln);border-radius:12px;width:min(640px,94vw);max-height:92vh;padding:16px}
+dialog::backdrop{background:rgba(5,8,20,.6)}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:10px 0}
+.ck{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.ck label{display:flex;gap:5px;align-items:center;background:var(--p2);border-radius:99px;padding:4px 10px;color:var(--tx);cursor:pointer}
+.ck input{width:auto}
+svg{display:block;width:100%;height:auto}
+.em{text-align:center;padding:40px 16px}
+.th{width:64px;height:40px;object-fit:cover;border-radius:6px;border:1px solid var(--ln);cursor:zoom-in;background:var(--p2)}
+#lb{padding:10px;max-width:96vw;width:auto}#lb img{max-width:100%;max-height:82vh;display:block;cursor:zoom-out}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:9px 16px;border-radius:8px;font-weight:600;display:none}
+</style></head><body>
+<header><h1>Journal de trading</h1><div style="flex:1"></div><button class="btn" onclick="ed()">Ajouter un trade</button></header>
+<nav id="nav"></nav><main id="app"></main><div id="toast"></div>
+<dialog id="dlg"></dialog><dialog id="lb"></dialog>
+<script>
+const K='tj_v1',DS=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+const EM=['Calme','Confiant','Discipliné','Impatient','FOMO','Peur','Revanche'];
+const ER=['Sortie trop tôt','Pas de stop','Sur-trading','Entrée tardive','Taille excessive','Règles respectées'];
+let S={trades:[],cap:10000,pb:[{id:'p1',name:'Breakout',rules:'Cassure d’un range avec volume\nStop sous la structure\nRisque max 1 %'},{id:'p2',name:'Pullback',rules:'Tendance claire sur H1\nEntrée sur retest de la moyenne\nR:R minimum 2'}]};
+try{const j=localStorage.getItem(K);if(j)S=Object.assign(S,JSON.parse(j))}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const $=s=>document.querySelector(s),sum=a=>a.reduce((x,y)=>x+y,0);
+const n2=(n,d=2)=>n.toLocaleString('fr-FR',{minimumFractionDigits:d,maximumFractionDigits:d});
+const $f=n=>(n<0?'−':n>0?'+':'')+n2(Math.abs(n))+' $',cl=n=>n>0?'g':n<0?'r':'';
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pnl=t=>(t.side==='short'?-1:1)*(t.exit-t.entry)*t.size*(t.mult||1)-(t.fees||0);
+const rr=t=>{if(!t.stop)return null;const k=Math.abs(t.entry-t.stop)*t.size*(t.mult||1);return k?pnl(t)/k:null};
+const bd=(a,b)=>a.date.localeCompare(b.date)||a.id-b.id;
+const toast=m=>{const t=$('#toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2200)};
+function st(L){const p=L.map(pnl),w=p.filter(x=>x>0),l=p.filter(x=>x<0),gw=sum(w),gl=-sum(l);let c=0,pk=0,dd=0;[...L].sort(bd).forEach(t=>{c+=pnl(t);pk=Math.max(pk,c);dd=Math.max(dd,pk-c)});const rs=L.map(rr).filter(x=>x!=null);
+return{n:L.length,net:sum(p),wr:L.length?w.length/L.length:0,pf:gl?gw/gl:(gw?Infinity:0),aw:w.length?gw/w.length:0,al:l.length?gl/l.length:0,ex:L.length?sum(p)/L.length:0,dd,r:rs.length?sum(rs)/rs.length:0,gw}}
+let V='dash',per='all',q='',fo='all',cm=new Date(),armed=null,ed_id=null;
+const TABS=[['dash','Tableau de bord'],['tr','Trades'],['cal','Calendrier'],['an','Analyses'],['pb','Playbook'],['set','Données']];
+function go(v){V=v;armed=null;render()}
+function filt(){if(per==='all')return S.trades;const d=new Date();d.setDate(d.getDate()-+per);const k=d.toISOString().slice(0,10);return S.trades.filter(t=>t.date>=k)}
+function days(L){const m={};L.forEach(t=>m[t.date]=(m[t.date]||0)+pnl(t));return m}
+function score(s,L){const dv=Object.values(days(L)),a=[Math.min(100,s.wr/.6*100),s.pf===Infinity?100:Math.min(100,s.pf/2.5*100),s.al?Math.min(100,s.aw/s.al/2*100):(s.aw?100:0),Math.max(0,100-s.dd/S.cap*500),dv.length?dv.filter(x=>x>0).length/dv.length*100:0];return{a,t:Math.round(sum(a)/5)}}
+function radar(a){const N=['Win %','Profit factor','Gain / perte','Drawdown','Constance'],P=(i,r)=>{const g=-Math.PI/2+i*2*Math.PI/5;return[(100+Math.cos(g)*r).toFixed(1),(100+Math.sin(g)*r).toFixed(1)]};
+let g='';[.33,.66,1].forEach(f=>g+=`<polygon points="${[0,1,2,3,4].map(i=>P(i,70*f)).join(' ')}" fill="none" stroke="var(--ln)"/>`);
+return`<svg viewBox="0 0 200 200" style="max-width:260px;margin:auto">${g}<polygon points="${a.map((v,i)=>P(i,70*v/100)).join(' ')}" fill="var(--ac)" fill-opacity=".3" stroke="var(--ac)" stroke-width="2"/>${N.map((n,i)=>{const[x,y]=P(i,88);return`<text x="${x}" y="${y}" font-size="9" text-anchor="middle" dominant-baseline="middle" fill="var(--mu)">${n}</text>`}).join('')}</svg>`}
+function eq(L){const s=[...L].sort(bd);let c=0;const p=[0];s.forEach(t=>p.push(c+=pnl(t)));if(p.length<2)return'';const mn=Math.min(...p),mx=Math.max(...p),X=i=>10+i/(p.length-1)*580,Y=v=>200-(v-mn)/((mx-mn)||1)*180-10,pts=p.map((v,i)=>X(i).toFixed(1)+','+Y(v).toFixed(1)).join(' '),col=c>=0?'var(--g)':'var(--r)';
+return`<svg viewBox="0 0 600 210"><line x1="10" x2="590" y1="${Y(0)}" y2="${Y(0)}" stroke="var(--ln)" stroke-dasharray="4"/><polygon points="10,${Y(0)} ${pts} 590,${Y(0)}" fill="${col}" fill-opacity=".15"/><polyline points="${pts}" fill="none" stroke="${col}" stroke-width="2.5" stroke-linejoin="round"/><text x="12" y="12" font-size="10" fill="var(--mu)">${$f(mx)}</text><text x="12" y="208" font-size="10" fill="var(--mu)">${$f(mn)}</text></svg>`}
+function dbars(L){const m=days(L),k=Object.keys(m).sort().slice(-30);if(!k.length)return'';const mx=Math.max(...k.map(x=>Math.abs(m[x])))||1,w=580/k.length;
+return`<svg viewBox="0 0 600 170"><line x1="10" x2="590" y1="85" y2="85" stroke="var(--ln)"/>${k.map((d,i)=>{const h=Math.abs(m[d])/mx*70;return`<rect x="${10+i*w+1}" y="${m[d]>=0?85-h:85}" width="${Math.max(2,w-2)}" height="${Math.max(1,h)}" rx="2" fill="${m[d]>=0?'var(--g)':'var(--r)'}"><title>${d} : ${$f(m[d])}</title></rect>`}).join('')}</svg>`}
+const K1=(l,v,c='')=>`<div class="pn k"><span>${l}</span><b class="${c}">${v}</b></div>`;
+function dash(){const L=filt(),s=st(L);
+const sel=`<div class="tb"><select onchange="per=this.value;render()">${[['all','Depuis le début'],['30','30 derniers jours'],['7','7 derniers jours']].map(o=>`<option value="${o[0]}" ${per===o[0]?'selected':''}>${o[1]}</option>`).join('')}</select></div>`;
+if(!S.trades.length)return`<div class="pn em"><h2>Aucun trade pour l’instant</h2><p class="mu">Ajoutez votre premier trade, ou chargez des données de démonstration pour explorer l’application.</p><button class="btn" onclick="ed()">Ajouter un trade</button> <button class="btn s" onclick="demo()">Charger la démo</button></div>`;
+const sc=score(s,L);
+return sel+`<div class="row c6">${K1('P&L net',$f(s.net),cl(s.net))}${K1('Taux de réussite',n2(s.wr*100,1)+' %')}${K1('Profit factor',s.pf===Infinity?'∞':n2(s.pf))}${K1('Gain moy. / perte moy.',s.al?n2(s.aw/s.al):'—')}${K1('Espérance',$f(s.ex),cl(s.ex))}${K1('Drawdown max',n2(s.dd)+' $','r')}</div>
+<div class="row c2"><div class="pn"><h2>Score du trader : ${sc.t} / 100</h2>${radar(sc.a)}</div><div class="pn"><h2>Courbe de capital</h2>${eq(L)}<div class="mu">${s.n} trades · R moyen ${n2(s.r)}</div></div></div>
+<div class="row c2"><div class="pn"><h2>P&L quotidien (30 derniers jours)</h2>${dbars(L)}</div><div class="pn"><h2>Derniers trades</h2>${[...L].sort(bd).reverse().slice(0,6).map(t=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--ln)"><span>${esc(t.symbol)} <span class="tag">${t.side==='short'?'Short':'Long'}</span> <span class="mu">${t.date}</span></span><b class="${cl(pnl(t))}">${$f(pnl(t))}</b></div>`).join('')}</div></div>`}
+function trs(){let L=[...S.trades].sort(bd).reverse().filter(t=>(!q||(t.symbol+t.setup+t.notes).toLowerCase().includes(q.toLowerCase()))&&(fo==='all'||(fo==='w'?pnl(t)>0:pnl(t)<=0)));
+return`<div class="tb"><input placeholder="Rechercher (symbole, setup, notes)" value="${esc(q)}" oninput="q=this.value;clearTimeout(window._t);window._t=setTimeout(()=>{render();const i=$('.tb input');i.focus();i.setSelectionRange(q.length,q.length)},300)"><select onchange="fo=this.value;render()">${[['all','Tous'],['w','Gagnants'],['l','Perdants']].map(o=>`<option value="${o[0]}" ${fo===o[0]?'selected':''}>${o[1]}</option>`).join('')}</select><span class="mu">${L.length} trades</span></div>
+<div class="pn sc"><table><tr><th>Date</th><th>Symbole</th><th>Sens</th><th>Setup</th><th>Entrée</th><th>Sortie</th><th>P&L</th><th>R</th><th>Note</th><th>Émotion</th><th>Capture</th><th></th></tr>${L.map(t=>{const r=rr(t);return`<tr class="tr"><td>${t.date}</td><td><b>${esc(t.symbol)}</b></td><td>${t.side==='short'?'Short':'Long'}</td><td>${esc(t.setup)}</td><td>${t.entry}</td><td>${t.exit}</td><td class="${cl(pnl(t))}"><b>${$f(pnl(t))}</b></td><td>${r==null?'—':n2(r)+' R'}</td><td>${'★'.repeat(t.rating||0)}</td><td>${esc(t.emotion)}</td><td>${t.img?`<img class="th" data-i="${t.id}" alt="Capture ${esc(t.symbol)}" onclick="lb(${t.id})">`:''}</td><td><button class="btn s" onclick="ed(${t.id})">Ouvrir</button></td></tr>`}).join('')||'<tr><td colspan="12" class="mu">Aucun trade ne correspond.</td></tr>'}</table></div>`}
+function cal(){const y=cm.getFullYear(),m=cm.getMonth(),off=(new Date(y,m,1).getDay()+6)%7,dim=new Date(y,m+1,0).getDate(),by={};S.trades.forEach(t=>(by[t.date]=by[t.date]||[]).push(t));
+const key=d=>`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const mv=[];for(let d=1;d<=dim;d++)if(by[key(d)])mv.push(Math.abs(sum(by[key(d)].map(pnl))));const mx=Math.max(1,...mv);
+let h=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim','Semaine'].map(x=>`<div class="hd">${x}</div>`).join(''),wk=[],all=[],c=0;
+for(let i=0;i<off;i++){h+='<div></div>';c++}
+for(let d=1;d<=dim;d++){const L=by[key(d)]||[],p=sum(L.map(pnl));all.push(...L);wk.push(...L);
+h+=`<div class="cd" style="${L.length?`background:color-mix(in srgb,var(${p>=0?'--g':'--r'}) ${15+Math.round(45*Math.abs(p)/mx)}%,var(--pn))`:''}"><span class="mu">${d}</span>${L.length?`<b>${$f(p)}</b>${L.length} trade${L.length>1?'s':''}`:''}</div>`;c++;
+if(c%7===0||d===dim){if(d===dim)while(c%7){h+='<div></div>';c++}const w=sum(wk.map(pnl));h+=`<div class="cd w">${wk.length?`<b class="${cl(w)}">${$f(w)}</b>${wk.length} trades`:''}</div>`;wk=[]}}
+const s=st(all);
+return`<div class="tb"><button class="btn s" onclick="cm=new Date(y0(),m0()-1,1);render()">‹</button><b style="min-width:150px;text-align:center">${cm.toLocaleDateString('fr-FR',{month:'long',year:'numeric'})}</b><button class="btn s" onclick="cm=new Date(y0(),m0()+1,1);render()">›</button><span class="mu">Mois : <b class="${cl(s.net)}">${$f(s.net)}</b> · ${s.n} trades</span></div><div class="cal">${h}</div>`}
+const y0=()=>cm.getFullYear(),m0=()=>cm.getMonth();
+function grp(title,fn,L=S.trades){const m={};L.forEach(t=>{const k=fn(t);if(k)(m[k]=m[k]||[]).push(t)});const e=Object.entries(m).map(([k,v])=>[k,st(v)]).sort((a,b)=>b[1].net-a[1].net),mx=Math.max(1,...e.map(x=>Math.abs(x[1].net)));
+return`<div class="pn"><h2>${title}</h2>${e.map(([k,s])=>`<div class="ar"><span>${esc(k)}</span><div style="display:flex"><div class="bar ${s.net<0?'n':''}" style="width:${Math.abs(s.net)/mx*100}%"></div></div><span class="${cl(s.net)}"><b>${$f(s.net)}</b> <span class="mu">${s.n} · ${Math.round(s.wr*100)} %</span></span></div>`).join('')||'<span class="mu">Pas encore de données.</span>'}</div>`}
+function an(){if(!S.trades.length)return dash();const er={};S.trades.forEach(t=>(t.mistakes||[]).forEach(k=>(er[k]=er[k]||[]).push(t)));
+const ex=`<div class="pn"><h2>Impact des erreurs et des règles</h2>${Object.entries(er).map(([k,v])=>{const s=st(v);return`<div class="ar"><span>${esc(k)}</span><span class="mu">${s.n} trades</span><span class="${cl(s.net)}"><b>${$f(s.net)}</b></span></div>`}).join('')||'<span class="mu">Cochez des erreurs dans vos trades pour voir leur coût.</span>'}</div>`;
+return`<div class="row c2">${grp('Par setup',t=>t.setup)}${grp('Par jour de la semaine',t=>DS[new Date(t.date+'T12:00').getDay()])}${grp('Par symbole',t=>t.symbol)}${grp('Par émotion',t=>t.emotion)}${grp('Par sens',t=>t.side==='short'?'Short':'Long')}${ex}</div>`}
+function pbv(){return`<div class="pn" style="margin-bottom:12px"><h2>Nouvelle stratégie</h2><div class="fg"><div><label>Nom</label><input id="pn"></div></div><label>Règles (une par ligne)</label><textarea id="pr" rows="3"></textarea><p><button class="btn" onclick="addpb()">Ajouter la stratégie</button></p></div><div class="row c2">${S.pb.map(p=>{const s=st(S.trades.filter(t=>t.setup===p.name));return`<div class="pn"><h2>${esc(p.name)}</h2><p class="mu" style="white-space:pre-line">${esc(p.rules)}</p><p>${s.n} trades · ${Math.round(s.wr*100)} % réussite · <b class="${cl(s.net)}">${$f(s.net)}</b></p><button class="btn s ${armed===p.id?'d':''}" onclick="dpb('${p.id}')">${armed===p.id?'Confirmer la suppression':'Supprimer'}</button></div>`}).join('')}</div>`}
+function addpb(){const n=$('#pn').value.trim();if(!n)return toast('Donnez un nom à la stratégie');S.pb.push({id:'p'+Date.now(),name:n,rules:$('#pr').value});save();render()}
+function dpb(id){if(armed!==id){armed=id;return render()}S.pb=S.pb.filter(p=>p.id!==id);armed=null;save();render()}
+function setv(){return`<div class="row c2"><div class="pn"><h2>Code d’accès</h2><input type="password" id="code" autocomplete="off" value="${esc(gc())}" onchange="try{localStorage.setItem('tj_code',this.value)}catch(e){};toast('Code enregistré')"><p class="mu">Le même code que la variable APP_CODE configurée sur Vercel. Il protège la lecture automatique des captures.</p></div><div class="pn"><h2>Capital de départ</h2><input type="number" id="cap" value="${S.cap}" onchange="S.cap=+this.value||10000;save();toast('Capital mis à jour')"><p class="mu">Sert au calcul du score (drawdown).</p></div><div class="pn"><h2>Sauvegarde</h2><p class="mu">Vos données sont stockées dans ce navigateur. Exportez-les régulièrement.</p><p><button class="btn" onclick="exj()">Exporter en JSON</button> <button class="btn s" onclick="csv()">Exporter en CSV</button></p><label>Importer un fichier JSON</label><input type="file" accept=".json" onchange="imp(this.files[0])"></div><div class="pn"><h2>Démonstration</h2><p><button class="btn s" onclick="demo()">Ajouter 40 trades fictifs</button></p></div><div class="pn"><h2>Zone sensible</h2><p><button class="btn ${armed==='all'?'d':'s'}" onclick="wipe()">${armed==='all'?'Confirmer : tout effacer':'Effacer tous les trades'}</button></p></div></div>`}
+function dl(n,tx){try{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([n.endsWith('.csv')?'\ufeff'+tx:tx],{type:n.endsWith('.csv')?'text/csv;charset=utf-8':'application/json'}));a.download=n;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1500)}catch(e){toast('Export impossible')}}
+function csv(){const h=['date','symbole','sens','entree','sortie','taille','frais','stop','setup','emotion','pnl','R','notes'];dl('trades.csv',[h.join(';')].concat(S.trades.sort(bd).map(t=>[t.date,t.symbol,t.side,t.entry,t.exit,t.size,t.fees||0,t.stop||'',t.setup,t.emotion,pnl(t).toFixed(2),(rr(t)||'')&&n2(rr(t)||0),'"'+String(t.notes||'').replace(/"/g,'""').replace(/\n/g,' ')+'"'].join(';'))).join('\n'))}
+function imp(f){if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!Array.isArray(d.trades))throw 0;const im=d.imgs||{};delete d.imgs;S=Object.assign(S,d);save();Object.keys(im).forEach(k=>ip(+k,im[k]));toast('Import réussi');render()}catch(e){toast('Fichier invalide : choisissez un export JSON du journal')}};r.readAsText(f)}
+function wipe(){if(armed!=='all'){armed='all';return render()}S.trades.forEach(t=>t.img&&ip(t.id,null));S.trades=[];armed=null;save();render()}
+function demo(){const sy=[['ES',50,1],['NQ',20,1],['EURUSD',10000,1],['BTCUSD',.1,1]],out=[];let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+for(let i=0;i<40;i++){const d=new Date();d.setDate(d.getDate()-Math.floor(i*1.6));if(d.getDay()%6===0)d.setDate(d.getDate()-1);const s=sy[Math.floor(rnd()*4)],long=rnd()>.4,base=s[0]==='BTCUSD'?60000:s[0]==='EURUSD'?1.08:s[0]==='ES'?5400:18800,e=base*(1+(rnd()-.5)*.01),win=rnd()<.55,mv=base*(win?.0025+rnd()*.004:-(.0015+rnd()*.0025)),x=e+(long?mv:-mv),stp=long?e-base*.003:e+base*.003,pl=S.pb[Math.floor(rnd()*S.pb.length)];
+out.push({id:Date.now()+i,date:d.toISOString().slice(0,10),symbol:s[0],side:long?'long':'short',entry:+e.toFixed(5),exit:+x.toFixed(5),size:s[0]==='ES'||s[0]==='NQ'?1:s[0]==='BTCUSD'?.2:1,mult:s[0]==='ES'?50:s[0]==='NQ'?20:s[0]==='EURUSD'?10000:1,fees:2.5,stop:+stp.toFixed(5),setup:pl?pl.name:'',emotion:EM[Math.floor(rnd()*7)],mistakes:rnd()<.3?[ER[Math.floor(rnd()*6)]]:[],rating:1+Math.floor(rnd()*5),notes:win?'Exécution propre, plan respecté.':'Entrée un peu tôt, à revoir.'})}
+S.trades=S.trades.concat(out);save();toast('40 trades fictifs ajoutés');go('dash')}
+function ed(id){ed_id=id||null;pend=null;rmi=false;const t=id?S.trades.find(x=>x.id===id):{date:new Date().toISOString().slice(0,10),side:'long',mult:1,fees:0,rating:3,mistakes:[]};
+const op=(a,v)=>a.map(x=>`<option ${x===v?'selected':''}>${esc(x)}</option>`).join('');
+$('#dlg').innerHTML=`<h2>${id?'Modifier le trade':'Nouveau trade'}</h2><div class="pn" style="margin:10px 0"><label>Remplir depuis une capture TradingView</label><input type="file" accept="image/*" onchange="pick(this.files[0])"><p class="mu" id="sm" style="margin:6px 0 0">Ajoutez la capture : les prix et le sens sont lus automatiquement, vous vérifiez avant d’enregistrer.</p><img id="pvi" class="th" alt="Capture du trade" style="display:none;width:100%;height:auto;max-height:240px;object-fit:contain;margin-top:8px;cursor:default"><button type="button" class="btn s" id="rmb" style="display:none;margin-top:6px" onclick="rmc()">Retirer la capture</button></div><form id="f" onsubmit="return sv(event)"><div class="fg">
+<div><label>Date</label><input type="date" name="date" value="${t.date}" required></div><div><label>Symbole</label><input name="symbol" value="${esc(t.symbol)}" placeholder="ES, EURUSD…" required></div>
+<div><label>Sens</label><select name="side"><option value="long" ${t.side==='long'?'selected':''}>Long</option><option value="short" ${t.side==='short'?'selected':''}>Short</option></select></div>
+<div><label>Prix d’entrée</label><input type="number" step="any" name="entry" value="${t.entry??''}" required></div><div><label>Prix de sortie</label><input type="number" step="any" name="exit" value="${t.exit??''}" required></div>
+<div><label>Taille</label><input type="number" step="any" name="size" value="${t.size??''}" required></div><div><label>Valeur du point</label><input type="number" step="any" name="mult" value="${t.mult}"></div><div><label>Frais ($)</label><input type="number" step="any" name="fees" value="${t.fees}"></div>
+<div><label>Stop</label><input type="number" step="any" name="stop" value="${t.stop??''}"></div><div><label>Objectif</label><input type="number" step="any" name="target" value="${t.target??''}"></div>
+<div><label>Setup</label><select name="setup"><option value="">—</option>${op(S.pb.map(p=>p.name),t.setup)}</select></div><div><label>Émotion</label><select name="emotion"><option value="">—</option>${op(EM,t.emotion)}</select></div>
+<div><label>Note du trade</label><select name="rating">${[1,2,3,4,5].map(n=>`<option value="${n}" ${n===t.rating?'selected':''}>${'★'.repeat(n)}</option>`).join('')}</select></div></div>
+<label>Erreurs et règles</label><div class="ck">${ER.map(e=>`<label><input type="checkbox" name="mk" value="${e}" ${(t.mistakes||[]).includes(e)?'checked':''}>${e}</label>`).join('')}</div>
+<label>Notes</label><textarea name="notes" rows="3" placeholder="Contexte, raisons d’entrée, ce que j’ai appris">${esc(t.notes)}</textarea>
+<p class="mu" id="pv"></p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn">Enregistrer le trade</button><button type="button" class="btn s" onclick="$('#dlg').close()">Annuler</button>${id?`<button type="button" class="btn d" id="dbtn" onclick="dt()">Supprimer</button>`:''}</div></form>`;
+$('#dlg').showModal();$('#f').oninput=pv;pv();if(t.img)ig(t.id).then(u=>u&&showp(u))}
+let pend=null,rmi=false;
+const DB=()=>new Promise((ok,ko)=>{const r=indexedDB.open('tj_img',1);r.onupgradeneeded=()=>r.result.createObjectStore('i');r.onsuccess=()=>ok(r.result);r.onerror=()=>ko(r.error)});
+const ig=async id=>{try{const d=await DB();return await new Promise(ok=>{const r=d.transaction('i').objectStore('i').get(id);r.onsuccess=()=>ok(r.result||null);r.onerror=()=>ok(null)})}catch(e){return null}};
+const ip=async(id,v)=>{try{const d=await DB();return await new Promise(ok=>{const t=d.transaction('i','readwrite');v?t.objectStore('i').put(v,id):t.objectStore('i').delete(id);t.oncomplete=()=>ok(true);t.onerror=()=>ok(false);t.onabort=()=>ok(false)})}catch(e){return false}};
+const b2u=b=>new Promise(ok=>{const r=new FileReader();r.onload=()=>ok(r.result);r.readAsDataURL(b)});
+const showp=u=>{const i=$('#pvi');if(!i)return;i.src=u;i.style.display='block';$('#rmb').style.display='inline-block'};
+const rmc=()=>{pend=null;rmi=true;const i=$('#pvi');i.style.display='none';i.removeAttribute('src');$('#rmb').style.display='none'};
+async function pick(f){if(!f)return;try{pend=await b2u(await shrink(f));rmi=false;showp(pend)}catch(e){$('#sm').textContent='Image illisible : choisissez un fichier PNG ou JPEG.';return}scan(f)}
+function hyd(){document.querySelectorAll('img[data-i]').forEach(async i=>{const u=await ig(+i.dataset.i);if(u)i.src=u})}
+async function lb(id){const u=await ig(id);if(!u)return toast('Capture introuvable');const d=$('#lb');d.innerHTML=`<img src="${u}" alt="Capture du trade" onclick="$('#lb').close()"><button class="btn s" style="margin-top:8px" onclick="$('#lb').close()">Fermer</button>`;d.showModal()}
+async function exj(){const im={};for(const t of S.trades)if(t.img){const u=await ig(t.id);if(u)im[t.id]=u}dl('journal-trading.json',JSON.stringify(Object.assign({},S,{imgs:im})))}
+const MU={ES:50,NQ:20,MES:5,MNQ:2,YM:5,MYM:.5,RTY:50,CL:1000,GC:100,MGC:10};
+const shrink=(f,mx=1600,q=.9)=>new Promise((ok,ko)=>{const i=new Image(),u=URL.createObjectURL(f);i.onload=()=>{const k=Math.min(1,mx/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext('2d').drawImage(i,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>b?ok(b):ko(new Error('img')),'image/jpeg',q)};i.onerror=()=>ko(new Error('img'));i.src=u});
+const gc=()=>{try{return localStorage.getItem('tj_code')||''}catch(e){return''}};
+async function scan(file){if(!file)return;const m=$('#sm');m.textContent='Lecture de la capture en cours…';
+try{const img=(await b2u(await shrink(file,1600,.8))).split(',')[1];
+const x=await fetch('/api/scan',{method:'POST',headers:{'Content-Type':'application/json','x-access-code':gc()},body:JSON.stringify({image:img})});
+if(x.status===401){m.textContent='Code d’accès manquant ou incorrect : saisissez-le dans l’onglet Données.';return}
+if(!x.ok)throw new Error(x.status);
+const r=await x.json(),F=$('#f').elements,ok=[];
+const put=(k,v)=>{if(v==null||v===''||F[k]==null)return;if(typeof v==='number'&&!isFinite(v))return;F[k].value=v;ok.push(k)};
+let sy=r.symbol?String(r.symbol).toUpperCase().replace(/[0-9]*!$/,''):null;put('symbol',sy);
+if(r.side==='long'||r.side==='short')put('side',r.side);
+['entry','exit','stop','target','size','fees'].forEach(k=>put(k,typeof r[k]==='number'?r[k]:null));
+if(/^\d{4}-\d{2}-\d{2}$/.test(r.date||''))put('date',r.date);
+if(sy&&MU[sy]&&+F.mult.value===1){F.mult.value=MU[sy];ok.push('mult')}
+pv();const L={symbol:'symbole',side:'sens',entry:'entrée',exit:'sortie',stop:'stop',target:'objectif',size:'taille',fees:'frais',date:'date',mult:'valeur du point'};
+const need=['entry','exit','size'].filter(k=>F[k].value==='').map(k=>L[k]);
+m.textContent=(ok.length?'Lu sur la capture : '+ok.map(k=>L[k]).join(', ')+'. Vérifiez chaque valeur avant d’enregistrer.':'Aucune valeur lisible sur cette capture.')+(need.length?' À compléter : '+need.join(', ')+'.':'')}
+catch(e){m.textContent='Lecture impossible : essayez une capture plus nette ou saisissez les valeurs à la main.'}}
+function rd(){const f=new FormData($('#f')),o=Object.fromEntries(f);['entry','exit','size','mult','fees','stop','target'].forEach(k=>o[k]=o[k]===''||o[k]==null?null:+o[k]);o.mult=o.mult||1;o.fees=o.fees||0;o.rating=+o.rating;o.mistakes=f.getAll('mk');delete o.mk;return o}
+function pv(){const o=rd();if(o.entry==null||o.exit==null||!o.size)return $('#pv').textContent='';const p=pnl(o),r=rr(o);$('#pv').innerHTML=`Résultat : <b class="${cl(p)}">${$f(p)}</b>${r==null?'':' · '+n2(r)+' R'}`}
+function sv(e){e.preventDefault();const o=rd();let t;if(ed_id){t=S.trades.find(x=>x.id===ed_id);Object.assign(t,o)}else{o.id=Date.now();S.trades.push(o);t=o}
+(async()=>{let ok=true;if(pend){ok=await ip(t.id,pend);t.img=ok}else if(rmi){await ip(t.id,null);t.img=false}
+save();$('#dlg').close();toast(ok?'Trade enregistré':'Trade enregistré, mais la capture n’a pas pu être sauvegardée');render()})();return false}
+function dt(){const b=$('#dbtn');if(b.dataset.a!=='1'){b.dataset.a='1';b.textContent='Confirmer la suppression';return}ip(ed_id,null);S.trades=S.trades.filter(x=>x.id!==ed_id);save();$('#dlg').close();toast('Trade supprimé');render()}
+function render(){$('#nav').innerHTML=TABS.map(t=>`<button class="${V===t[0]?'on':''}" onclick="go('${t[0]}')">${t[1]}</button>`).join('');$('#app').innerHTML={dash,tr:trs,cal,an,pb:pbv,set:setv}[V]();hyd()}
+try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+render();
+</script></body></html>
